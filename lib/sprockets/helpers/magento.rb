@@ -9,10 +9,9 @@ module Sprockets
 
       def glyphs
         if @glyphs.nil?
-          fc_index_path = @options[:custom][:sprockets_context].environment.find_asset 'resources/fontcustom/templates/fontcustom_index.yml'
+          fc_index_path = @options[:custom][:sprockets_context].environment.find_asset 'fontcustom_index.json'
           return Hash.new if fc_index_path.nil?
-          hash = YAML.load(File.read(fc_index_path))
-          @glyphs = hash['glyphs']
+          @glyphs = JSON.load(File.new(fc_index_path))
         end
         @glyphs
       end
